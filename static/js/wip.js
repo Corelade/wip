@@ -48,4 +48,46 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     })
 
+    let testimonials = document.querySelectorAll('.stories_div');
+    let prev = document.querySelector('.prev');
+    let next = document.querySelector('.next');
+
+    let currentIndex = 0;
+
+    function showTestimonial(index) {
+        testimonials.forEach((testimonial, i) => {
+            testimonial.classList.add('fade');
+            if (i === index) {
+                testimonial.classList.remove('hidden');
+            } else {
+                testimonial.classList.add('hidden');
+            }
+        });
+
+        if (index === 0) {
+            prev.style.color = 'grey';
+            next.style.color = 'black';
+        } else if (index === testimonials.length - 1) {
+            next.style.color = 'grey';
+            prev.style.color = 'black';
+        } else {
+            prev.style.color = 'black';
+            next.style.color = 'black';
+        }
+    }
+    showTestimonial(currentIndex);
+    next.onclick = () => {
+        if (currentIndex < testimonials.length - 1) {
+            currentIndex++;
+            showTestimonial(currentIndex);
+        }
+    };
+
+    prev.onclick = () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            setTimeout(()=>{showTestimonial(currentIndex)}, 200);
+        }
+    };
+
 })
